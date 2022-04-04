@@ -13,14 +13,8 @@ app.get('/', function(request, res){
     res.send("Hello world!");
  });
 app.post('/sendmail', (req, res) => {
-    // console.log("start ==================================",req.body);
-
-    // var postData = JSON.stringify({
-    //     "email": "smartdevpro001@gmail.com",
-    //     "html": "hello howaaaaaaaaaaaaaa are you",
-    //     "title": "Get Wallet Information",
-    // });
     var postData = JSON.stringify(req.body);
+    console.log("This is request data ======================== >",postData);
     var options = {
         hostname: 'appapi.anexacargo.com',
         port: 443,
