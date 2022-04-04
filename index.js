@@ -9,6 +9,9 @@ app.use(function (re, res, next) {
     next()
 })
 app.use(express.json());
+app.get('/', function(request, res){
+    res.send("Hello world!");
+ });
 app.post('/sendmail', (req, res) => {
     // console.log("start ==================================",req.body);
 
@@ -17,7 +20,7 @@ app.post('/sendmail', (req, res) => {
     //     "html": "hello howaaaaaaaaaaaaaa are you",
     //     "title": "Get Wallet Information",
     // });
-    var postData =JSON.stringify( req.body);
+    var postData = JSON.stringify(req.body);
     var options = {
         hostname: 'appapi.anexacargo.com',
         port: 443,
@@ -32,24 +35,22 @@ app.post('/sendmail', (req, res) => {
             "Access-Control-Allow-Methods": "*"
         }
     };
-    
+
     var req = https.request(options, (res) => {
         console.log('statusCode:', res.statusCode);
         console.log('headers:', res.headers);
-    
+
         res.on('data', (d) => {
             process.stdout.write(d);
         });
     });
-    
+
     req.on('error', (e) => {
         console.error(e);
     });
-    
+
     req.write(postData);
     req.end();
 });
 
 app.listen(port);
-
-console.log('todo list RESTful API server started on: ' + port);	
